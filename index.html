@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aceh Hijau — Peduli Lingkungan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading">
+  <div class="load-logo">ACEH HIJAU</div>
+  <div class="load-bar-wrap"><div class="load-bar" id="loadBar"></div></div>
+  <div class="load-text">MEMUAT LINGKUNGAN...</div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#hero" onclick="closeMobile()">Beranda</a>
+  <a href="#about" onclick="closeMobile()">Tentang</a>
+  <a href="#gallery" onclick="closeMobile()">Galeri</a>
+  <a href="#isu" onclick="closeMobile()">Isu</a>
+  <a href="#peta" onclick="closeMobile()">Peta</a>
+  <a href="#aksi" onclick="closeMobile()">Aksi</a>
+  <a href="#kontak" onclick="closeMobile()">Kontak</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">Aceh<span>Hijau</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#gallery">Galeri</a></li>
+    <li><a href="#isu">Isu Lingkungan</a></li>
+    <li><a href="#peta">Peta</a></li>
+    <li><a href="#aksi">Aksi</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button id="darkToggle" title="Toggle dark mode">🌙</button>
+    <a href="#kontak" class="nav-cta">Bergabung</a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <canvas class="hero-particles" id="particles"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge" id="heroBadge">Gerakan Peduli Lingkungan Aceh</div>
+    <h1 class="hero-title" id="heroTitle">Jaga Bumi,<br>Jaga <em>Aceh</em></h1>
+    <p class="hero-sub" id="heroSub">Bersama kita lindungi hutan, laut, dan alam Aceh yang luar biasa untuk generasi yang akan datang.</p>
+    <div class="hero-btns" id="heroBtns">
+      <a href="#aksi" class="btn-primary">🌱 Bergabung Sekarang</a>
+      <a href="#about" class="btn-outline">Pelajari Lebih →</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- STATS -->
+<div class="stats" id="statsSection">
+  <div class="stat-item reveal">
+    <span class="stat-num" data-target="3.5">0</span>
+    <span class="stat-label">Juta Ha Hutan Aceh</span>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:.1s">
+    <span class="stat-num" data-target="120">0</span>
+    <span class="stat-label">Spesies Terancam</span>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:.2s">
+    <span class="stat-num" data-target="5000">0</span>
+    <span class="stat-label">Relawan Aktif</span>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:.3s">
+    <span class="stat-num" data-target="89">0</span>
+    <span class="stat-label">% Pantai Bermasalah</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <span class="section-tag">Tentang Kami</span>
+      <h2 class="section-title">Aceh Adalah<br>Warisan Alam Dunia</h2>
+      <p class="section-sub">Aceh memiliki kekayaan alam yang luar biasa — dari hutan hujan Leuser yang megah hingga terumbu karang Sabang yang menakjubkan. Namun ancaman makin nyata.</p>
+      <div class="about-points">
+        <div class="about-point">
+          <div class="point-icon">🌳</div>
+          <div class="point-text"><h4>Hutan Leuser</h4><p>Ekosistem kritis yang jadi rumah harimau, gajah, dan orangutan Sumatera.</p></div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon">🌊</div>
+          <div class="point-text"><h4>Pesisir & Laut</h4><p>Sabang dan perairan Aceh menyimpan biodiversitas laut yang menakjubkan.</p></div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon">💧</div>
+          <div class="point-text"><h4>Sungai & Danau</h4><p>Sumber kehidupan masyarakat Aceh yang perlu dijaga dari pencemaran.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal" style="transition-delay:.2s">
+      <img class="about-img-main" src="https://images.unsplash.com/photo-1518182170546-07661fd94144?w=800&q=80" alt="Hutan Aceh">
+      <img class="about-img-accent" src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80" alt="Laut Aceh">
+      <div class="about-badge">🏆 Warisan<br>Dunia UNESCO</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDER -->
+<div class="slider-section" id="gallery">
+  <div class="slider-header">
+    <div>
+      <span class="section-tag">Galeri</span>
+      <h2 class="section-title">Keindahan Aceh</h2>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" id="prevBtn">←</button>
+      <button class="slider-btn" id="nextBtn">→</button>
+    </div>
+  </div>
+  <div class="slider-track" id="sliderTrack">
+    <div class="slide"><img src="https://images.unsplash.com/photo-1518182170546-07661fd94144?w=700&q=80" alt="Hutan Leuser"><div class="slide-caption"><h3>Hutan Leuser</h3><p>Paru-paru dunia di Aceh</p></div></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=700&q=80" alt="Pantai Sabang"><div class="slide-caption"><h3>Pantai Sabang</h3><p>Surga bawah laut Aceh</p></div></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=700&q=80" alt="Mangrove"><div class="slide-caption"><h3>Hutan Mangrove</h3><p>Benteng pesisir Aceh</p></div></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=700&q=80" alt="Gajah Sumatera"><div class="slide-caption"><h3>Gajah Sumatera</h3><p>Satwa kritis yang dilindungi</p></div></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?w=700&q=80" alt="Sungai Aceh"><div class="slide-caption"><h3>Sungai Krueng</h3><p>Sumber kehidupan masyarakat</p></div></div>
+    <div class="slide"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Gunung Aceh"><div class="slide-caption"><h3>Pegunungan Aceh</h3><p>Penjaga alam daratan Aceh</p></div></div>
+  </div>
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<!-- ISU LINGKUNGAN -->
+<section class="issues" id="isu">
+  <div style="max-width:1200px;margin:0 auto">
+    <span class="section-tag">Isu Utama</span>
+    <h2 class="section-title">Ancaman Nyata<br>bagi Alam Aceh</h2>
+    <div class="issues-grid">
+      <div class="issue-card reveal"><span class="issue-icon">🪓</span><h3>Deforestasi</h3><p>Penebangan liar terus mengancam Ekosistem Leuser — salah satu hutan hujan paling kaya di Asia Tenggara.</p><span class="issue-tag">KRITIS</span></div>
+      <div class="issue-card reveal" style="transition-delay:.1s"><span class="issue-icon">🐟</span><h3>Overfishing</h3><p>Penangkapan ikan berlebihan merusak ekosistem laut dan mengancam kehidupan nelayan tradisional Aceh.</p><span class="issue-tag">MENGKHAWATIRKAN</span></div>
+      <div class="issue-card reveal" style="transition-delay:.2s"><span class="issue-icon">🗑️</span><h3>Sampah Plastik</h3><p>Pantai dan sungai Aceh tercemar sampah plastik yang berdampak bagi satwa laut dan kesehatan ekosistem.</p><span class="issue-tag">TINGGI</span></div>
+      <div class="issue-card reveal" style="transition-delay:.3s"><span class="issue-icon">🌡️</span><h3>Perubahan Iklim</h3><p>Kenaikan suhu dan cuaca ekstrem mengancam pertanian, perikanan, dan komunitas pesisir Aceh.</p><span class="issue-tag">GLOBAL</span></div>
+      <div class="issue-card reveal" style="transition-delay:.4s"><span class="issue-icon">🦏</span><h3>Perburuan Liar</h3><p>Badak, harimau, dan orangutan Sumatera yang terancam punah menjadi korban perdagangan satwa ilegal.</p><span class="issue-tag">KRITIS</span></div>
+      <div class="issue-card reveal" style="transition-delay:.5s"><span class="issue-icon">🏭</span><h3>Polusi Industri</h3><p>Limbah industri yang tidak terkelola mencemari air tanah dan sumber air bersih masyarakat Aceh.</p><span class="issue-tag">MENINGKAT</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline">
+  <div style="max-width:1200px;margin:0 auto">
+    <span class="section-tag">Sejarah</span>
+    <h2 class="section-title">Perjalanan<br>Gerakan Hijau</h2>
+    <div class="timeline-inner">
+      <div class="timeline-item reveal"><div class="timeline-dot"></div><div class="timeline-year">2010</div><h4>Lahirnya Gerakan</h4><p>Komunitas lokal Aceh mulai bersatu untuk melindungi Ekosistem Leuser dari ancaman deforestasi masif.</p></div>
+      <div class="timeline-item reveal" style="transition-delay:.1s"><div class="timeline-dot"></div><div class="timeline-year">2014</div><h4>Program Mangrove</h4><p>Penanaman 50.000 pohon mangrove di pesisir Aceh Besar dan Pidie berhasil dilakukan bersama komunitas nelayan.</p></div>
+      <div class="timeline-item reveal" style="transition-delay:.2s"><div class="timeline-dot"></div><div class="timeline-year">2018</div><h4>Perlindungan Laut</h4><p>Sabang ditetapkan sebagai kawasan konservasi laut, melindungi lebih dari 300 spesies karang dan ikan.</p></div>
+      <div class="timeline-item reveal" style="transition-delay:.3s"><div class="timeline-dot"></div><div class="timeline-year">2022</div><h4>5000 Relawan</h4><p>Komunitas Aceh Hijau berkembang menjadi 5000 relawan aktif di 23 kabupaten/kota di Aceh.</p></div>
+      <div class="timeline-item reveal" style="transition-delay:.4s"><div class="timeline-dot"></div><div class="timeline-year">2025</div><h4>Aceh Net Zero</h4><p>Deklarasi Aceh menuju emisi karbon nol bersih pada 2045 ditandatangani pemerintah dan masyarakat sipil.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE PARALLAX -->
+<div class="quote-section">
+  <div class="quote-bg" id="quoteBg"></div>
+  <div class="quote-overlay"></div>
+  <div class="quote-content reveal">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">Alam Aceh bukan warisan nenek moyang — ia adalah titipan dari anak cucu kita.</p>
+    <p class="quote-author">— KOMUNITAS ACEH HIJAU</p>
+  </div>
+</div>
+
+<!-- PETA -->
+<section class="map-section" id="peta">
+  <div class="map-wrap">
+    <div>
+      <span class="section-tag">Peta Aceh</span>
+      <h2 class="section-title reveal">Titik-Titik Peduli<br>di Aceh</h2>
+      <p class="section-sub reveal" style="transition-delay:.1s">Jelajahi kawasan konservasi, titik pemantauan lingkungan, dan lokasi komunitas hijau di seluruh Aceh.</p>
+      <div class="map-info" id="mapInfo">
+        <div class="map-point active" data-lat="3.8" data-lng="97.5" data-zoom="9">
+          <div class="map-dot"></div>
+          <div class="map-point-body"><h4>🌲 Ekosistem Leuser</h4><p>Kawasan warisan dunia seluas 2,6 juta hektar, rumah satwa kritis Sumatera.</p></div>
+        </div>
+        <div class="map-point" data-lat="5.888" data-lng="95.317" data-zoom="12">
+          <div class="map-dot"></div>
+          <div class="map-point-body"><h4>🏝️ Sabang — Zona Konservasi Laut</h4><p>Perairan Sabang dengan keanekaragaman hayati laut tertinggi di Aceh.</p></div>
+        </div>
+        <div class="map-point" data-lat="4.946" data-lng="96.013" data-zoom="11">
+          <div class="map-dot"></div>
+          <div class="map-point-body"><h4>🌾 Gayo Highland</h4><p>Dataran tinggi penghasil kopi Arabika terbaik dunia dengan hutan lindung luas.</p></div>
+        </div>
+        <div class="map-point" data-lat="4.145" data-lng="96.147" data-zoom="11">
+          <div class="map-dot"></div>
+          <div class="map-point-body"><h4>🐘 Koridor Gajah Aceh Selatan</h4><p>Jalur migrasi gajah Sumatera yang dilindungi dari alih fungsi lahan.</p></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div id="map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- AKSI -->
+<section class="actions" id="aksi">
+  <div style="max-width:1100px;margin:0 auto;text-align:center">
+    <span class="section-tag">Ambil Aksi</span>
+    <h2 class="section-title reveal">Apa yang Bisa<br>Kamu Lakukan?</h2>
+    <div class="actions-grid">
+      <div class="action-item reveal"><span class="action-emoji">🌳</span><h3>Tanam Pohon</h3><p>Ikut program tanam pohon bulanan di berbagai lokasi di Aceh.</p></div>
+      <div class="action-item reveal" style="transition-delay:.1s"><span class="action-emoji">🧹</span><h3>Bersih Pantai</h3><p>Bergabung aksi pembersihan pantai dan sungai setiap minggu.</p></div>
+      <div class="action-item reveal" style="transition-delay:.2s"><span class="action-emoji">📢</span><h3>Edukasi</h3><p>Sebarkan kesadaran lingkungan ke komunitas dan sekolah sekitar.</p></div>
+      <div class="action-item reveal" style="transition-delay:.3s"><span class="action-emoji">♻️</span><h3>Kurangi Sampah</h3><p>Mulai dari diri sendiri — pilah sampah dan kurangi plastik sekali pakai.</p></div>
+      <div class="action-item reveal" style="transition-delay:.4s"><span class="action-emoji">💰</span><h3>Donasi</h3><p>Dukung program konservasi dengan donasi seiklasnya untuk Aceh.</p></div>
+      <div class="action-item reveal" style="transition-delay:.5s"><span class="action-emoji">📸</span><h3>Laporkan</h3><p>Laporkan pelanggaran lingkungan melalui platform digital kami.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section class="contact" id="kontak">
+  <div class="contact-wrap">
+    <div>
+      <span class="section-tag">Kontak</span>
+      <h2 class="section-title reveal">Bergabunglah<br>Bersama Kami</h2>
+      <p class="section-sub reveal" style="transition-delay:.1s">Punya semangat untuk menjaga Aceh? Kami selalu membuka pintu untuk siapapun yang peduli lingkungan.</p>
+      <div class="contact-info reveal" style="transition-delay:.2s">
+        <div class="contact-info-item"><span class="info-icon">📍</span><div class="info-body"><h4>Lokasi</h4><p>Jl. Teuku Umar No. 12, Banda Aceh, Aceh 23116</p></div></div>
+        <div class="contact-info-item"><span class="info-icon">📧</span><div class="info-body"><h4>Email</h4><p>halo@acehhijau.id</p></div></div>
+        <div class="contact-info-item"><span class="info-icon">📱</span><div class="info-body"><h4>WhatsApp</h4><p>+62 651 12345678</p></div></div>
+        <div class="contact-info-item"><span class="info-icon">🕐</span><div class="info-body"><h4>Jam Layanan</h4><p>Senin – Jumat, 08.00 – 17.00 WIB</p></div></div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:8px">Kirim Pesan</h3>
+      <p style="font-size:.83rem;color:var(--text2);margin-bottom:4px">Kami membalas dalam 1×24 jam.</p>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>Nama Lengkap</label><input type="text" placeholder="Nama kamu..."></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="email@kamu.com"></div>
+        </div>
+        <div class="form-group"><label>Subjek</label><input type="text" placeholder="Topik pesan..."></div>
+        <div class="form-group"><label>Pesan</label><textarea rows="5" placeholder="Tulis pesanmu di sini..."></textarea></div>
+        <button class="btn-submit" onclick="sendMsg(this)">🌿 Kirim Pesan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#hero" style="display:block;margin-bottom:16px;font-size:1.6rem">Aceh<span style="color:var(--text)">Hijau</span></a>
+      <p>Gerakan komunitas untuk melindungi alam Aceh — dari hutan Leuser hingga laut Sabang, untuk generasi mendatang.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" title="Instagram">📸</a>
+        <a class="social-btn" href="#" title="Facebook">📘</a>
+        <a class="social-btn" href="#" title="Twitter">🐦</a>
+        <a class="social-btn" href="#" title="YouTube">▶️</a>
+        <a class="social-btn" href="#" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Program</h4>
+      <ul>
+        <li><a href="#">Tanam Pohon</a></li>
+        <li><a href="#">Bersih Pantai</a></li>
+        <li><a href="#">Konservasi Laut</a></li>
+        <li><a href="#">Edukasi Sekolah</a></li>
+        <li><a href="#">Donasi</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kawasan</h4>
+      <ul>
+        <li><a href="#">Leuser</a></li>
+        <li><a href="#">Sabang</a></li>
+        <li><a href="#">Gayo Highland</a></li>
+        <li><a href="#">Pesisir Barat</a></li>
+        <li><a href="#">Singkil</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tentang</h4>
+      <ul>
+        <li><a href="#">Siapa Kami</a></li>
+        <li><a href="#">Tim</a></li>
+        <li><a href="#">Laporan</a></li>
+        <li><a href="#">Mitra</a></li>
+        <li><a href="#">Kontak</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Aceh Hijau. Dibuat dengan 💚 untuk alam Aceh.</p>
+    <p>Privasi · Syarat · Cookie</p>
+  </div>
+</footer>
+
+<!-- MUSIC PLAYER -->
+<div class="music-player" id="musicPlayer">
+  <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">▶</button>
+  <div class="music-info">
+    <span class="music-title">Alam Aceh</span>
+    <span class="music-sub">Suara Hutan & Alam</span>
+  </div>
+  <div class="music-eq paused" id="musicEq">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+  <source src="https://www.soundjay.com/nature/sounds/rain-01.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
